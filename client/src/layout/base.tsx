@@ -3,6 +3,8 @@ import NavBar from './inc/navbar';
 import { Layout, Breadcrumb, theme } from 'antd';
 const { Header, Content, Sider, Footer } = Layout;
 import Sidebar from './inc/sidebar';
+import Contacts from '../content/contacts';
+
 const BaseLayout: React.FC = () => {
   const {
     token: { colorBgContainer },
@@ -23,7 +25,9 @@ const BaseLayout: React.FC = () => {
           <Sider style={{ background: colorBgContainer }} width={200}>
             <Sidebar />
           </Sider>
-          <Content style={{ padding: '0 24px', minHeight: 280 }}>Content</Content>
+          <Content style={{ padding: '0 24px', minHeight: 280 }}>
+            <Contacts />
+          </Content>
         </Layout>
       </Content>
       <Footer style={{ textAlign: 'center' }}>AutoCRM ©2023 Created by Pmsdrh</Footer>
