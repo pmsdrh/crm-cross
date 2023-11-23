@@ -1,0 +1,3 @@
+// Don't run this file! If you don't know what you're doing...
+const db = require('./database/models');
+(async () => await db.sequelize.sync({ force: true }))();
