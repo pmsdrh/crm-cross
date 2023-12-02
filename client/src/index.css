@@ -1,0 +1,9 @@
+@import url("./assets/fonts/iranSans/IranSans.css");
+
+*, *::-moz-placeholder {
+    font-family: 'IRSans';
+    font-size: 13px;
+}
+.beau {
+    margin: 5px;
+}

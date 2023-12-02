@@ -22,7 +22,10 @@ const BaseLayout: React.FC = () => {
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
         <Layout style={{ padding: '24px 0', background: colorBgContainer }}>
-          <Sider style={{ background: colorBgContainer }} width={200}>
+          <Sider style={{ background: colorBgContainer }} width={200}
+          breakpoint={"lg"}
+          collapsedWidth="0"
+          >
             <Sidebar />
           </Sider>
           <Content style={{ padding: '0 24px', minHeight: 280 }}>

@@ -13,9 +13,12 @@
     "@types/react-highlight-words": "^0.16.7",
     "antd": "^5.11.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-highlight-words": "^0.20.0"
   },
   "devDependencies": {
+    "@iconify/icons-material-symbols": "^1.2.58",
+    "@iconify/react": "^4.1.1",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
