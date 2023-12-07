@@ -13,7 +13,7 @@ import {
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
-import { Button, Divider, Space, Tabs, message, theme } from 'antd';
+import { Divider, Space, Tabs, message, theme } from 'antd';
 import type { CSSProperties } from 'react';
 import { useState } from 'react';
 
@@ -27,7 +27,7 @@ const iconStyles: CSSProperties = {
 };
 
 const Page = () => {
-  const [loginType, setLoginType] = useState<LoginType>('phone');
+  const [loginType, setLoginType] = useState<LoginType>('account');
   const { token } = theme.useToken();
   return (
     <div
@@ -38,38 +38,50 @@ const Page = () => {
     >
       <LoginFormPage
         backgroundImageUrl="https://mdn.alipayobjects.com/huamei_gcee1x/afts/img/A*y0ZTS6WLwvgAAAAAAAAAAAAADml6AQ/fmt.webp"
-        logo="https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+        logo="/vite.svg"
         backgroundVideoUrl="https://gw.alipayobjects.com/v/huamei_gcee1x/afts/video/jXRBRK_VAwoAAAAAAAAAAAAAK4eUAQBr"
-        title="Github"
+        title="ورود"
         containerStyle={{
           backgroundColor: 'rgba(0, 0, 0,0.65)',
           backdropFilter: 'blur(4px)',
         }}
-        subTitle="全球最大的代码托管平台"
-        activityConfig={{
-          style: {
-            boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
-            color: token.colorTextHeading,
-            borderRadius: 8,
-            backgroundColor: 'rgba(255,255,255,0.25)',
-            backdropFilter: 'blur(4px)',
+        subTitle={`ورود به عنوان ${loginType == 'account' ? 'مشتری' : 'فروشنده'}`}
+        submitter = {{
+          searchConfig: {
+            submitText: 'ورود',
           },
-          title: '活动标题，可配置图片',
-          subTitle: '活动介绍说明文字',
-          action: (
-            <Button
-              size="large"
-              style={{
-                borderRadius: 20,
-                background: token.colorBgElevated,
-                color: token.colorPrimary,
-                width: 120,
-              }}
-            >
-              去看看
-            </Button>
-          ),
-        }}
+          render: (_, dom) => dom.pop(),
+          submitButtonProps: {
+            size: 'large',
+            style: {
+              width: '100%',
+            },
+          }}}
+        // activityConfig={{
+        //   style: {
+        //     boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
+        //     color: token.colorTextHeading,
+        //     borderRadius: 8,
+        //     backgroundColor: 'rgba(255,255,255,0.25)',
+        //     backdropFilter: 'blur(4px)',
+        //     textAlign: 'center',
+        //   },
+        //   title: 'اینجا',
+        //   subTitle: 'نمیدونم قراره چی بزارم',
+        //   action: (
+        //     <Button
+        //       size="large"
+        //       style={{
+        //         borderRadius: 20,
+        //         background: token.colorBgElevated,
+        //         color: token.colorPrimary,
+        //         width: 120,
+        //       }}
+        //     >
+        //       باشه!
+        //     </Button>
+        //   ),
+        // }}
         actions={
           <div
             style={{
@@ -87,7 +99,7 @@ const Page = () => {
                   fontSize: 14,
                 }}
               >
-                其他登录方式
+                پلتفرم های دیگر
               </span>
             </Divider>
             <Space align="center" size={24}>
@@ -142,8 +154,8 @@ const Page = () => {
           activeKey={loginType}
           onChange={(activeKey) => setLoginType(activeKey as LoginType)}
         >
-          <Tabs.TabPane key={'account'} tab={'账号密码登录'} />
-          <Tabs.TabPane key={'phone'} tab={'手机号登录'} />
+          <Tabs.TabPane key={'account'} tab={'فروشنده'} />
+          <Tabs.TabPane key={'phone'} tab={'مشتری'} />
         </Tabs>
         {loginType === 'account' && (
           <>
@@ -160,11 +172,11 @@ const Page = () => {
                   />
                 ),
               }}
-              placeholder={'用户名: admin or user'}
+              placeholder={'نام کاربری'}
               rules={[
                 {
                   required: true,
-                  message: '请输入用户名!',
+                  message: 'این فیلد اجباری است!',
                 },
               ]}
             />
@@ -206,15 +218,15 @@ const Page = () => {
                 ),
               }}
               name="mobile"
-              placeholder={'手机号'}
+              placeholder={'شماره تلفن'}
               rules={[
                 {
                   required: true,
-                  message: '请输入手机号！',
+                  message: 'لطفا شماره تلفن خود را وارد نمایید.',
                 },
                 {
-                  pattern: /^1\d{10}$/,
-                  message: '手机号格式错误！',
+                  pattern: /\d{11}/,
+                  message: 'لطفا یک شماره تلفن صحیح وارد نمایید',
                 },
               ]}
             />
@@ -233,22 +245,22 @@ const Page = () => {
               captchaProps={{
                 size: 'large',
               }}
-              placeholder={'请输入验证码'}
+              placeholder={'کد تایید'}
               captchaTextRender={(timing, count) => {
                 if (timing) {
-                  return `${count} ${'获取验证码'}`;
+                  return `${count} ${'ثانیه'}`;
                 }
-                return '获取验证码';
+                return 'دریافت';
               }}
               name="captcha"
               rules={[
                 {
                   required: true,
-                  message: '请输入验证码！',
+                  message: 'این فیلد اجباری است!',
                 },
               ]}
               onGetCaptcha={async () => {
-                message.success('获取验证码成功！验证码为：1234');
+                message.success('پیامک برای شما ارسال شد');
               }}
             />
           </>
@@ -259,14 +271,14 @@ const Page = () => {
           }}
         >
           <ProFormCheckbox noStyle name="autoLogin">
-            自动登录
+            مرا به خاطر بسپار
           </ProFormCheckbox>
           <a
             style={{
               float: 'right',
             }}
           >
-            忘记密码
+            فراموشی رمز عبور
           </a>
         </div>
       </LoginFormPage>
